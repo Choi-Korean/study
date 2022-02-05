@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 상세 페이지</title>
+</head>
+<body>
+<h1 th:text="${board.title}">제목입니다.</h1>        <!-- board 안의 title, content 각 tag 안에 넣어주는 기능 -->
+<p th:text="${board.content}">내용이 들어갈 부분입니다.</p>
+<a th:href="@{${board.filepath}}">다운받기</a>
+<a th:href="@{/board/delete(id=${board.id})}">글삭제</a>     <!-- button으로 해도 되지만, 링크 달기 쉽게 <a> tag로. #은 현재 주소. 우선 #으로-->
+<a th:href="@{/board/modify/{id}(id=${board.id})}">수정</a>
+<a th:text="${board.viewCount}">조회수</a>
+</body>
+</html>

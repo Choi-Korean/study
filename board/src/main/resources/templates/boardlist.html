@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">        <!-- html에 주소 추가해주어서 thymeleaf 문법 사용가능 -->
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
+</head>
+
+<style>
+    .layout{
+        width : 500px;
+        margin : 0 auto;
+    }
+</style>
+
+<body>
+    <div class="layout">
+        <table>
+            <thead>
+                <tr>
+                    <th>글번호</th>
+                    <th>제목</th>
+                    <th>조회수</th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- each는 반복문 개념. list에서 board가 없어질 때까지 반복함 -->
+                <tr th:each="board : ${list}">      <!-- BoardController에서 받은 list에 담긴 board 하나씩 빼기 -->
+                    <td th:text="${board.id}">1</td>
+
+                    <!-- 제목부분 수정. <a> tag 추가
+                     href는 a tag에 link 걸어주는 역할
+                    @가 localhost:8080인가보다, 그리고 쭉 이어서 각 each boar의 id값을 넣어줘서 링크할 주소 완성-->
+                    <td>
+                        <a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a>
+                    </td>
+                    <td th:text="${board.viewCount}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <th:block th:each="page: ${#numbers.sequence(startPage, endPage)}"> <!-- start에서 end까지 반복-->
+
+            <!-- 현재 page가 아니라면 이동시키기. 아 page 누르면 이동시키는 건가? 머지
+            parameter중, searchKeyword를 받아서 href에 이어서 붙이는 원리. 오홍-->
+            <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
+
+            <!--page block에 보이는 page와 현재 page가 같다면, 눌러도 이동할 수 없게-->
+            <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+        </th:block>
+        <form th:action="@{/board/list}" method="get">
+            <input type="text" name="searchKeyword">
+            <button type="submit">검색</button>
+        </form>
+
+        <form th:action="@{/board/write}" method="get">
+            <button type="submit">글쓰기</button>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<!-- controller에서 받아온 변수를 여기에 적용 -->
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var message = [[${message}]];       // controller에서 여기로 message 전송해줄 것
+    alert(message);             // alert 창을 띄워서 message 담아 보내고
+    location.replace([[${searchUrl}]]);     // page 이동시켜줄 경로 받아서, location을 replace 해주기
+
+    /*]]>*/
+
+</script>
+
+<body>
+
+</body>
+</html>

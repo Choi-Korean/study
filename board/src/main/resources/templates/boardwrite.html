@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성폼</title>
+</head>
+
+<!--** style 설정 **
+(1) layout이라는 클래스를 가지는 tag의 넓이를 500px, 양쪽 여백을 위아래는 0, 좌우는 auto로 잡겠다.
+
+ (2) layout tag 안의 input와 textarea style도 아래와 같이 변경한다 -->
+
+<style>
+    .layout{
+        width : 500px;
+        margin : 0 auto;
+    }
+
+    .layout input{
+        width : 100%;
+        box-sizing: border-box;
+    }
+    .layout textarea {
+        width : 100%;
+        margin-top : 10px;
+        min-height: 300px;
+    }
+</style>
+
+<body>
+    <div class="layout">
+        <!-- 이전에 작성한 input, textarea, button을 form으로 감싸줘야 함. 받은 data 모두 form에서 지정한
+        action 주소로 보내기 위해서인 듯. -->
+        <!-- data를 action주소로 post 방식으로 보낸다 -->
+        <form action="/board/writepro" method="post" enctype="multipart/form-data">
+            <input name="title" type="text">
+            <textarea name="content"></textarea>
+            <input type="file" name="file">
+            <button type="submit">작성</button>       <!-- 버튼 type submit으로 설정하여 data 전송 역할.
+             이 버튼을 누르면 form 안의 input, textarea 두가지 data가 form action 주소로 넘어감-->
+        </form>
+    </div>
+
+</body>
+</html>
