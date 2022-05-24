@@ -64,6 +64,7 @@
     </div>
     <div id="map" style="width:1000px; height:500px; margin-top:40px">
     </div>
+                                                                <!--  아래부터 수정 필요 -->
     <div th:each="naverMap : ${naverMap}">
         <input type="hidden" th:value="${naverMap.lat}" id="naverlat">
         <input type="hidden" th:value="${naverMap.lng}" id="naverlng">
